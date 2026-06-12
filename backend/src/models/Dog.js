@@ -7,7 +7,7 @@ const dogSchema = new mongoose.Schema(
     size: { type: String, enum: ['small', 'medium', 'large'], required: true },
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   },
-  { timestamps: true }
+  { timestamps: true, versionKey: false }
 );
 
 module.exports = mongoose.model('Dog', dogSchema);
