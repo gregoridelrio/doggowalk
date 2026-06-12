@@ -1,13 +1,22 @@
 require('dotenv').config();
-
+require('dotenv').config();
 const express = require('express');
+const connectDB = require('./config/db');
+const authRoutes = require('./routes/authRoutes');
+
 const app = express();
-const port = process.env.PORT;
+const PORT  = process.env.PORT;
+
+connectDB();
+
+app.use(express.json());
+
+app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.json({ message: '🐕 DoggoWalk API running' });
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen(PORT , () => {
+  console.log(`Server listening on http://localhost:${PORT}`);
 });
