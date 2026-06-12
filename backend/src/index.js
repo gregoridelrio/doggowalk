@@ -1,26 +1,11 @@
 require('dotenv').config();
-const express = require('express');
+const app = require('./app');
 const connectDB = require('./config/db');
-const authRoutes = require('./routes/authRoutes');
-const dogRoutes = require('./routes/dogRoutes');
-const walkerRoutes = require('./routes/walkerRoutes');
 
-const app = express();
-const PORT  = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
-connectDB();
-
-app.use(express.json());
-
-app.use('/api/auth', authRoutes);
-app.use('/api/dogs', dogRoutes);
-
-app.use('/api/walkers', walkerRoutes);
-
-app.get('/', (req, res) => {
-  res.json({ message: '🐕 DoggoWalk API running' });
-});
-
-app.listen(PORT , () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server listening on http://localhost:${PORT}`);
+  });
 });

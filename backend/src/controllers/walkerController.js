@@ -7,7 +7,7 @@ const createOrUpdateProfile = async (req, res) => {
     const profile = await WalkerProfile.findOneAndUpdate(
       { walker: req.user.id },
       { pricePerWalk, availableDays },
-      { new: true, upsert: true }
+      { returnDocument: 'after', upsert: true }
     );
 
     res.json(profile);
