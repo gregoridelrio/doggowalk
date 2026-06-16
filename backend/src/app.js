@@ -7,6 +7,13 @@ const bookingRoutes = require('./routes/bookingRoutes');
 
 const app = express();
 
+const cors = require('cors')
+
+app.use(cors({
+  origin: process.env.FRONTEND_URL
+}))
+app.use(express.json())
+
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/dogs', dogRoutes);
